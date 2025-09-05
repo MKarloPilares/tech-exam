@@ -11,7 +11,8 @@ async fn main() {
     dotenv::dotenv().ok();
 
     let app = Router::new()
-        .nest("/eth", routes::eth::router());
+        .nest("/api/eth", routes::eth::router())
+        .nest("/api/token", routes::token::router());
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
     println!("Server running at  http://{}", addr);
