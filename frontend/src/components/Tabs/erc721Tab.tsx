@@ -21,7 +21,6 @@ const ERC721Tab: React.FC<ERC721TabProps> = ({ account }) => {
   const handleMintSuccess = (txHash: string, tokenId: string, recipient: string) => {
     setSuccess(`NFT minted successfully! Token ID: #${tokenId}`);
     setError('');
-    // Clear the tokenURI input after successful mint
     setTokenURI('');
   };
 
@@ -59,7 +58,6 @@ const ERC721Tab: React.FC<ERC721TabProps> = ({ account }) => {
         </div>
       )}
 
-      {/* Collection Details Display */}
       {collectionDetails && (
         <div style={{ 
           marginBottom: '30px', 

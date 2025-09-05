@@ -5,11 +5,9 @@ import TokenCheckButton from '../Buttons/tokenCheckButton';
 interface AccountData {
   address: string;
   balance: string;
-  // Add other account fields as needed
 }
 
 interface TokenData {
-  // Add token balance fields as needed
   [key: string]: any;
 }
 
@@ -22,7 +20,6 @@ const AddressTab: React.FC = () => {
 
   const handleAccountSuccess = (message: string) => {
     try {
-      // Extract JSON from the success message
       const jsonStart = message.indexOf('{');
       if (jsonStart !== -1) {
         const jsonString = message.substring(jsonStart);
@@ -85,7 +82,6 @@ const AddressTab: React.FC = () => {
         </div>
       )}
 
-      {/* Account Details Display */}
       {accountData && (
         <div style={{ 
           marginBottom: '30px', 
@@ -103,7 +99,6 @@ const AddressTab: React.FC = () => {
         </div>
       )}
 
-      {/* Token Data Display */}
       {tokenData && (
         <div style={{ 
           marginBottom: '30px', 
