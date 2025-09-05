@@ -3,9 +3,10 @@ import ethereumLogo from './assets/ethereum-eth-logo.png'
 import AccountTab from './components/Tabs/accountTab'
 import ERC20Tab from './components/Tabs/erc20Tab'
 import ERC721Tab from './components/Tabs/erc721Tab'
+import AddressTab from './components/Tabs/addressTab'
 import './App.css'
 
-type TabType = 'account' | 'erc20' | 'erc721';
+type TabType = 'account' | 'erc20' | 'erc721' | 'address';
 
 function App() {
   const [account, setAccount] = useState<string>('');
@@ -28,6 +29,8 @@ function App() {
         return <ERC20Tab account={account} />;
       case 'erc721':
         return <ERC721Tab account={account} />;
+      case 'address':
+        return <AddressTab/>
       default:
         return null;
     }
@@ -88,6 +91,19 @@ function App() {
             }}
           >
             ERC721 Minting
+          </button>
+          <button 
+            onClick={() => setActiveTab('address')}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: activeTab === 'erc721' ? '#646cff' : 'transparent',
+              color: activeTab === 'erc721' ? 'white' : '#646cff',
+              border: '1px solid #646cff',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}
+          >
+            Address Checker
           </button>
         </div>
       </div>
