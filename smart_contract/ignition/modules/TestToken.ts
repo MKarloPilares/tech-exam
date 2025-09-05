@@ -4,8 +4,7 @@
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
 export default buildModule("TestTokenModule", (m) => {
-  const initialSupply = m.getParameter("InitialSupply", 1000000);
-  const testToken = m.contract("TestToken", [initialSupply]);
+  const testToken = m.contract("TestToken");
 
   return { testToken };
 });
