@@ -48,7 +48,6 @@ const ERC20Tab: React.FC<ERC20TabProps> = ({ account }) => {
         </div>
       )}
 
-      {/* Token Details Display */}
       {tokenDetails && (
         <div style={{ 
           marginBottom: '30px', 
