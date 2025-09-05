@@ -11,18 +11,15 @@ interface Transaction {
 
 interface AccountTabProps {
   account: string;
-  balance: string;
-  onConnect: (address: string) => void;
-  onGetBalance: (balance: string) => void;
+  setAccount: (address: string) => void;
 }
 
 const AccountTab: React.FC<AccountTabProps> = ({
   account,
-  balance,
-  onConnect,
-  onGetBalance
+  setAccount,
 }) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [balance, setBalance] = useState<string>("");
 
   const handleSetTransactions = (transactions: Transaction[]) => {
     setTransactions(transactions);
@@ -55,9 +52,9 @@ const AccountTab: React.FC<AccountTabProps> = ({
       )}
 
       <ConnectButton
-        setAccount={onConnect}
+        setAccount={setAccount}
         account={account}
-        setBalance={onGetBalance}
+        setBalance={setBalance}
         setTransactions={handleSetTransactions}
       />
       <p>{balance}</p>

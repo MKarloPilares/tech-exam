@@ -48,6 +48,7 @@ interface EtherscanResponse {
 const ConnectButton: React.FC<ConnectButtonProps> = ({setAccount, account, setBalance, setTransactions}) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>('');
+    const [hasCheckedConnection, setHasCheckedConnection] = useState(false);
 
     const getBalance = async (address: string) => {
         if (window.ethereum) {
@@ -72,7 +73,7 @@ const ConnectButton: React.FC<ConnectButtonProps> = ({setAccount, account, setBa
             }
 
             const response = await fetch(
-                `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${apiKey}`
+                `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${apiKey}`
             );
 
             const data: EtherscanResponse = await response.json();
@@ -82,7 +83,7 @@ const ConnectButton: React.FC<ConnectButtonProps> = ({setAccount, account, setBa
                     hash: tx.hash,
                     from: tx.from,
                     to: tx.to,
-                    value: tx.value,
+                    value: parseFloat(ethers.formatEther(tx.value)).toFixed(4), // Convert Wei to ETH
                     blockNumber: tx.blockNumber
                 }));
             }
@@ -95,7 +96,7 @@ const ConnectButton: React.FC<ConnectButtonProps> = ({setAccount, account, setBa
     };
 
     const checkConnection = useCallback(async () => {
-        if (window.ethereum) {
+        if (window.ethereum && !hasCheckedConnection && !account) {
             try {
                 const provider = new ethers.BrowserProvider(window.ethereum);
                 const accounts = await provider.listAccounts();
@@ -110,9 +111,11 @@ const ConnectButton: React.FC<ConnectButtonProps> = ({setAccount, account, setBa
                 }
             } catch (error) {
                 console.error('Error checking connection:', error);
+            } finally {
+                setHasCheckedConnection(true);
             }
         }
-    }, [setAccount, setBalance, setTransactions]);
+    }, [hasCheckedConnection, account]);
 
     useEffect(() => {
         checkConnection();
@@ -150,6 +153,7 @@ const ConnectButton: React.FC<ConnectButtonProps> = ({setAccount, account, setBa
         setAccount('');
         setBalance('0');
         setTransactions([]);
+        setHasCheckedConnection(false);
     };
 
     return (
