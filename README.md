@@ -6,8 +6,6 @@ This is a Full-Stack Decentralized Application project that demonstrates blockch
 - **Frontend**: React with TypeScript and Vite for fast development
 - **Backend**: Rust-based API server with Web3 integration
 - **Smart Contracts**: Solidity contracts deployed on Sepolia testnet
-- **Testing**: Comprehensive test suites for all components
-
 
 ## Prerequisites
 
@@ -137,7 +135,7 @@ npm run dev
  **ERC20 + ERC721**: While instructions stated to pick one, to show understanding and capabilities as a blockchain developer, both were accomplished. In a production environments, requirements will be followed.
  **Permissive Cors**: Opens API endpoints for any URL that calls them for development.
  **Etherscan API For Transaction Data**: Allows checking of transaction data faster than getting block data from Metamask and iterating through it.
- **No Caching + No Database + No Containerization**: Could learn while building, however as this is an assessment of current skills, honesty and transparency were the top priorities.
+ **No Caching + No Database + No Containerization**: Could try and learn while building, however as this is an assessment of current skills, honesty and transparency were the top priorities.
 
 ## Known Issues and Limitations
 
