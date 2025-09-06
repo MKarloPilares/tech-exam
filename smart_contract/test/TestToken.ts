@@ -12,7 +12,6 @@ describe("TestToken", function () {
     const { testToken } = await hre.ignition.deploy(TestTokenModule);
     const typedTestToken = await ethers.getContractAt("TestToken", await testToken.getAddress()) as TestToken;  
 
-    // Mint some initial tokens to the owner for testing
     await typedTestToken.mint(owner.address, ethers.parseEther("1000"));
 
     return { testToken: typedTestToken, owner, addr1, addr2 };
@@ -33,7 +32,6 @@ describe("TestToken", function () {
     });
 
     it("Should start with zero total supply before minting", async function () {
-      // Deploy without minting
       const [owner] = await ethers.getSigners();
       const { testToken } = await hre.ignition.deploy(TestTokenModule);
       const typedTestToken = await ethers.getContractAt("TestToken", await testToken.getAddress()) as TestToken;
@@ -74,7 +72,6 @@ describe("TestToken", function () {
       
       const mintAmount = ethers.parseEther("100");
       
-      // addr1 mints tokens
       await expect(typedTestToken.connect(addr1).mint(addr1.address, mintAmount))
         .to.not.be.reverted;
       
